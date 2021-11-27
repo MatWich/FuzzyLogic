@@ -92,15 +92,23 @@ class DifficultyEstymatorService:
         """ Run the estimation """
         if self.isStepsSet() and self.isIngredientsSet():
             values = {self.domains["steps"]: self.steps, self.domains["ingredients"]: self.ingredients}
-            print(self.result_rules(values))
+            self.printRulesShares()
+            floatFormat = "{:.2f}".format(self.result_rules(values))
+            print(f"Result: {floatFormat}")
 
     def getRulesShare(self) -> list:
+        """ returns string list with rules shares"""
         values = {self.domains["steps"]: self.steps, self.domains["ingredients"]: self.ingredients}
         rulesShares = []
         for index, rule in enumerate(self.rules):
             strForRuleShare = "Rule" + str(index + 1) + ": " + str(rule(values))
             rulesShares.append(strForRuleShare)
         return rulesShares
+
+    def printRulesShares(self) -> None:
+        """ Prints rule shares """
+        for rule in self.getRulesShare():
+            print(rule)
 
     """ Helpers """
 

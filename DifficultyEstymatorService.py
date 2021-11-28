@@ -1,5 +1,5 @@
 from fuzzylogic.classes import Domain, Rule
-from fuzzylogic.functions import triangular, trapezoid
+from fuzzylogic.functions import triangular, trapezoid, R, S
 
 
 class DifficultyEstymatorService:
@@ -71,13 +71,13 @@ class DifficultyEstymatorService:
     def setting_up_domains(self):
         """ Setting up all the variables in Domains """
         # IN
-        self.domains["steps"].low = trapezoid(1, 2, 3, 5)
+        self.domains["steps"].low = S(1, 5)
         self.domains["steps"].medium = triangular(4, 10)
-        self.domains["steps"].high = trapezoid(8, 10, 12, 12.01)
+        self.domains["steps"].high = R(8, 12)
 
-        self.domains["ingredients"].low = trapezoid(1, 1.01, 4, 5)
+        self.domains["ingredients"].low = S(1, 5)
         self.domains["ingredients"].medium = trapezoid(5, 7, 10, 12)
-        self.domains["ingredients"].high = trapezoid(10, 12, 14, 14.01)
+        self.domains["ingredients"].high = R(10, 14)
 
         # OUT
         self.domains["difficulty"].v_easy = triangular(0, 2)
